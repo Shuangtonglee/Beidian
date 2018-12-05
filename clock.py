@@ -14,7 +14,7 @@ sched = BlockingScheduler()
 
 urls = ['https://ibei.cn/1y5uOZ','https://m.beidian.com/detail/detail.html?iid=30409280&shop_id=1480734&utm_source=&offer_code=0']
 
-@sched.scheduled_job('cron', hour='0-23',minute='48')
+@sched.scheduled_job('cron', hour='0-23',minute='00')
 def get_data():
     # driver=webdriver.PhantomJS(executable_path='bin/phantomjs',service_args=service_args)
     # sales_number_list = []
