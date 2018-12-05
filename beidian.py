@@ -70,6 +70,8 @@ def get_data():
     driver.quit()
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), sales_number_list)
 
+    if not os.path.exists('static'):
+        os.makedirs('static')
 
     filename_path = 'static\sales_data.xlsx'
     sheet_name = datetime.datetime.now().strftime('%m-%d')
