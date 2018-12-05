@@ -45,7 +45,7 @@ def index():
 
 @app.route('/download')
 def download():
-    return send_file('static\sales_data.xlsx',as_attachment=True)
+    return send_file('static/sales_data.xlsx',as_attachment=True)
 
 @app.route('/pause')
 def pause():
@@ -73,7 +73,7 @@ def get_data():
     if not os.path.exists('static'):
         os.makedirs('static')
 
-    filename_path = 'static\sales_data.xlsx'
+    filename_path = 'static/sales_data.xlsx'
     sheet_name = datetime.datetime.now().strftime('%m-%d')
     if not os.path.exists(filename_path):
         wb = Workbook()
