@@ -1,0 +1,6 @@
+Flask==0.11.1
+selenium==3.4.3
+gunicorn==19.7.1
+openpyxl==2.4.8
+Flask_APScheduler==1.7.0
+
