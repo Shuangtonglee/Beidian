@@ -1,2 +1,2 @@
 web: gunicorn manage:app
-manage: python manage.py
+clock: python clock.py
