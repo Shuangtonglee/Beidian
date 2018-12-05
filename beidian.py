@@ -60,7 +60,7 @@ def resume():
 
 
 def get_data():
-    driver=webdriver.PhantomJS(executable_path='D:/App/phantomjs/bin/phantomjs',service_args=service_args)
+    driver=webdriver.PhantomJS(executable_path='bin/phantomjs',service_args=service_args)
     sales_number_list = []
     for url in urls:
         driver.get(url)
