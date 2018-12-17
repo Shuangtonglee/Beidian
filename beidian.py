@@ -5,6 +5,9 @@ from flask import Flask,send_file,render_template
 from flask_apscheduler import APScheduler
 from openpyxl import load_workbook,Workbook
 from selenium import webdriver
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
 from random import randint
 
 class Config(object):
@@ -65,7 +68,10 @@ def get_data():
     for url in urls:
         driver.get(url)
         time.sleep(randint(1,3))
-        sales_number = driver.find_element_by_class_name('J_sellerCount').text
+        try:
+            element = WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.CLASS_NAME,'J_sellerCount')))
+        finally:
+            sales_number = driver.find_element_by_class_name('J_sellerCount').text
         sales_number_list.append(sales_number)
     driver.quit()
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), sales_number_list)
