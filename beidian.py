@@ -91,7 +91,7 @@ def get_data():
         sheets = wb.get_sheet_names()
         if not sheet_name in sheets:
             ws = wb.create_sheet(sheet_name)
-            ws.append(['时间','销量'])
+            ws.append(['时间','销量','销量666'])
         else:
             ws = wb[sheet_name]
 
