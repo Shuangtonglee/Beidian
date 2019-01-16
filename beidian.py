@@ -41,12 +41,15 @@ service_args.append('--ignore-ssl-errors=true')
 
 
 
-
+col0 = ["B","H","N"]
 col1 = ["C","I","O"]
 col2 = ["D","J","P"]
 col3 = ["E","K","Q"]
 
 col4 = ["F","L","R"]
+
+
+align = Alignment(horizontal='right',vertical='center',wrap_text=True)
 
 app = Flask(__name__)
 scheduler = APScheduler()
@@ -109,6 +112,8 @@ def get_data():
     for i in range(len(sales)):
         ws.cell(column = 1,row = var['row1'],value = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         ws.cell(column = 2+6*i,row = var['row1'],value = sales[i])
+        h = "{}{}".format(col0[i],var['row1'])
+        ws[h].alignment = align
 
     for i in range(len(stocks)):
         ws.cell(column = 3+6*i,row = var['row2'],value = stocks[i])
@@ -136,13 +141,12 @@ def get_data():
             d = "{}{}".format(col1[i],var['row1']-2)
 
             e = "{}{}".format(col4[i],var['row1'])
-            align = Alignment(horizontal='right',vertical='center',wrap_text=True)
             if (ws[a].value-ws[b].value)-(ws[c].value-ws[d].value) == 0:
                 ws.cell(column = 6+6*i,row = var['row5'],value = "--")
                 ws[e].alignment = align
 
             else:
-                f = "={}{}-{}{}/{}{}".format(col3[i],str(var['row5']),col3[i],str(var['row5']-1),col3[i],str(var['row5']-1))
+                f = "=({}{}-{}{})/{}{}".format(col3[i],str(var['row5']),col3[i],str(var['row5']-1),col3[i],str(var['row5']-1))
                 ws.cell(column = 6+6*i,row = var['row5'],value = f)
                 ws[e].number_format = '0.00%'
         var['row5'] +=1
