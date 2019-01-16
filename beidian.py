@@ -86,10 +86,22 @@ def get_data():
         finally:
             sales_number = driver.find_element_by_class_name('J_sellerCount').text
             stocks_number = driver.find_element_by_class_name('J_stockNum').text
-        sales_number = sales_number.replace('人已买','')
-        stocks_number = stocks_number.replace('库存剩','').replace('件','')
-        sales.append(sales_number)
-        stocks.append(int(stocks_number))
+        try:
+            sales_number = sales_number.replace('人已买','')
+            stocks_number = stocks_number.replace('库存剩','').replace('件','')
+        except:
+            sales_number = 100000
+            stocks_number = 100000
+        try:
+            sales.append(sales_number)
+        except:
+            sales_number = 100000
+            sales.append(sales_number)
+        try:
+            stocks.append(int(stocks_number))
+        except:
+            stocks_number = 100000
+            stocks.append(stocks_number)
     driver.quit()
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), sales,stocks)
 
